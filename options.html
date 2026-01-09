@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Video Summarizer - Options</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #fff;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 32px;
+      font-size: 14px;
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 14px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      transition: all 0.2s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #667eea;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    input[type="number"] {
+      width: 120px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #667eea;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .help-text {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .help-text a {
+      color: #667eea;
+      text-decoration: none;
+    }
+
+    .help-text a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button.secondary {
+      background: rgba(255, 255, 255, 0.1);
+      margin-left: 12px;
+    }
+
+    button.secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    }
+
+    .status-message {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .status-message.success {
+      background: rgba(76, 175, 80, 0.2);
+      border: 1px solid rgba(76, 175, 80, 0.5);
+      color: #81c784;
+      display: block;
+    }
+
+    .status-message.error {
+      background: rgba(244, 67, 54, 0.2);
+      border: 1px solid rgba(244, 67, 54, 0.5);
+      color: #ff8a80;
+      display: block;
+    }
+
+    .stats {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 16px;
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .stats-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .stats-label {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+    }
+
+    .stats-value {
+      font-weight: 600;
+      color: #667eea;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>YouTube Video Summarizer</h1>
+    <p class="subtitle">Configure your extension settings</p>
+
+    <div class="section">
+      <h2 style="font-size: 18px; margin-bottom: 16px; color: #667eea;">🤖 AI Provider Settings</h2>
+      <p class="help-text" style="margin-bottom: 20px;">
+        Configure one or more AI providers. The extension will automatically fallback to the next provider if one fails.
+        <br><strong>Fallback order:</strong> Gemini → DeepSeek → Local Model
+      </p>
+
+      <label for="apiKey">1️⃣ Gemini API Key (Primary)</label>
+      <input type="password" id="apiKey" placeholder="Enter your Google Gemini API key">
+      <div class="help-text">
+        Get a free API key from <a href="https://makersuite.google.com/app/apikey" target="_blank">Google AI Studio</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <label for="openRouterApiKey">2️⃣ OpenRouter API Key</label>
+      <input type="password" id="openRouterApiKey" placeholder="Enter your OpenRouter API key (optional)">
+      <div class="help-text">
+        Access 100+ models with one key. Get free credits at <a href="https://openrouter.ai/keys"
+          target="_blank">OpenRouter</a>
+      </div>
+
+      <label for="openRouterModel" style="margin-top: 12px;">OpenRouter Model</label>
+      <input type="text" id="openRouterModel" placeholder="google/gemini-2.0-flash-exp:free (default)">
+      <div class="help-text">
+        Browse models at <a href="https://openrouter.ai/models" target="_blank">openrouter.ai/models</a>. Use ":free"
+        suffix for free models.
+      </div>
+    </div>
+
+    <div class="section">
+      <label for="deepSeekApiKey">3️⃣ DeepSeek API Key (Fallback)</label>
+      <input type="password" id="deepSeekApiKey" placeholder="Enter your DeepSeek API key (optional)">
+      <div class="help-text">
+        Get an API key from <a href="https://platform.deepseek.com/" target="_blank">DeepSeek Platform</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <label for="ollamaUrl">4️⃣ Local Model URL (Final Fallback)</label>
+      <input type="text" id="ollamaUrl" placeholder="http://localhost:11434 (optional)">
+      <div class="help-text">
+        URL of your local Ollama instance. <a href="https://ollama.ai/" target="_blank">Download Ollama</a>
+      </div>
+
+      <label for="ollamaModel" style="margin-top: 12px;">Local Model Name</label>
+      <input type="text" id="ollamaModel" placeholder="llama3.2 (default)">
+      <div class="help-text">
+        Model name to use (e.g., llama3.2, mistral, codellama)
+      </div>
+
+      <div
+        style="background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 8px; padding: 12px; margin-top: 16px;">
+        <strong style="color: #ffc107;">⚠️ Important: Enable CORS for Ollama</strong>
+        <p class="help-text" style="margin-top: 8px;">
+          Stop Ollama and restart with CORS enabled:
+        </p>
+        <code
+          style="display: block; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 4px; margin-top: 8px; font-size: 12px; color: #81c784;">
+          OLLAMA_ORIGINS="chrome-extension://*" ollama serve
+        </code>
+        <p class="help-text" style="margin-top: 8px;">
+          Or set environment variable permanently in your shell config.
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <label for="hoverDelay">⏱️ Hover Delay (milliseconds)</label>
+      <input type="number" id="hoverDelay" value="500" min="100" max="2000" step="100">
+      <div class="help-text">
+        Time to wait before showing summary (default: 500ms)
+      </div>
+    </div>
+
+    <div class="section">
+      <button id="saveBtn">Save Settings</button>
+      <button id="testProvidersBtn" class="secondary">Test Providers</button>
+      <button id="clearCacheBtn" class="secondary">Clear Cache</button>
+
+      <div id="statusMessage" class="status-message"></div>
+    </div>
+
+    <div class="section">
+      <label>Cache Statistics</label>
+      <div class="stats" id="cacheStats">
+        <div class="stats-row">
+          <span class="stats-label">Total cached summaries:</span>
+          <span class="stats-value" id="totalCached">-</span>
+        </div>
+        <div class="stats-row">
+          <span class="stats-label">Valid summaries:</span>
+          <span class="stats-value" id="validCached">-</span>
+        </div>
+        <div class="stats-row">
+          <span class="stats-label">Expired summaries:</span>
+          <span class="stats-value" id="expiredCached">-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+
+</html>

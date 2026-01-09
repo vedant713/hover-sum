@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Summarizer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            width: 320px;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-size: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .version {
+            font-size: 10px;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .new-badge {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .feature-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-desc {
+            font-size: 12px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 12px;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        button.secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .status {
+            text-align: center;
+            font-size: 11px;
+            margin-top: 12px;
+            padding: 8px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .status.ready {
+            background: rgba(76, 175, 80, 0.2);
+            color: #81c784;
+        }
+
+        .status.not-ready {
+            background: rgba(255, 152, 0, 0.2);
+            color: #ffb74d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h2>✨ YouTube Summarizer</h2>
+        <span class="version">v2.0</span>
+        <span class="new-badge">NEW</span>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-title">🖱️ Right-Click to Summarize</div>
+        <div class="feature-desc">
+            Right-click any video thumbnail on YouTube and select "✨ Summarize Video" - summary appears in the side
+            panel!
+        </div>
+    </div>
+
+    <div class="info-item">
+        <span class="info-label">Status:</span>
+        <span class="info-value" id="status">Checking...</span>
+    </div>
+
+    <div class="info-item">
+        <span class="info-label">Cached summaries:</span>
+        <span class="info-value" id="cacheCount">-</span>
+    </div>
+
+    <button id="openPanelBtn">📋 Open Summary Panel</button>
+    <button id="settingsBtn" class="secondary">⚙️ Settings</button>
+
+    <div class="status" id="statusMessage">
+        <!-- Status message will appear here -->
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
