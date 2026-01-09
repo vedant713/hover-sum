@@ -276,8 +276,8 @@ async function handleGetSummary(videoId) {
  * Check if any provider is configured
  */
 async function checkProviderConfig() {
-    const storage = await chrome.storage.sync.get(['apiKey', 'deepSeekApiKey', 'ollamaUrl']);
-    return !!(storage.apiKey || storage.deepSeekApiKey || storage.ollamaUrl);
+    const storage = await chrome.storage.sync.get(['apiKey', 'openRouterApiKey', 'deepSeekApiKey', 'ollamaUrl']);
+    return !!(storage.apiKey || storage.openRouterApiKey || storage.deepSeekApiKey || storage.ollamaUrl);
 }
 
 /**
